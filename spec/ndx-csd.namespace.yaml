@@ -1,0 +1,14 @@
+namespaces:
+- author:
+  - Ryan Ly
+  contact:
+  - rly@lbl.gov
+  doc: An NWB extension to add support for storing current source density analysis
+    results
+  name: ndx-csd
+  schema:
+  - namespace: core
+    neurodata_types:
+    - ElectricalSeries
+  - source: ndx-csd.extensions.yaml
+  version: 0.1.0
