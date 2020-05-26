@@ -1,8 +1,109 @@
 groups:
-- neurodata_type_def: TetrodeSeries
-  neurodata_type_inc: ElectricalSeries
-  doc: An extension of ElectricalSeries to include the tetrode ID for each time series.
+- neurodata_type_def: CSD
+  neurodata_type_inc: NWBDataInterface
+  doc: Results of a current source density (CSD) analysis.
   attributes:
-  - name: trode_id
-    dtype: int32
-    doc: The tetrode ID.
+  - name: description
+    dtype: text
+    doc: Description of the current source density analysis, including how it was
+      computed.
+  - name: num_trials
+    dtype: uint8
+    doc: Number of trials used to compute the average CSD.
+  - name: actual_electrodes
+    dtype: bool
+    default_value: false
+    doc: Whether the electrode locations provided correspond to actual electrode locations
+      as opposed to virtual electrode locations (where interpolation is used to compute
+      the CSD at the virtual locations).
+    required: false
+  - name: electrodes_reference_frame
+    dtype: text
+    doc: Description of what an electrode location of 0 (or (0,0) or (0,0,0)) represents,
+      e.g., most superior point of a linear probe, or most posterior and most left
+      point of a 2D array. This value should also describe what a positive value in
+      each dimension represents, e.g., +x is superior.
+  datasets:
+  - name: data
+    dtype: float32
+    dims:
+    - - num_times
+      - num_electrodes_x
+    - - num_times
+      - num_electrodes_x
+      - num_electrodes_y
+    - - num_times
+      - num_electrodes_x
+      - num_electrodes_y
+      - num_electrodes_z
+    shape:
+    - - null
+      - null
+    - - null
+      - null
+      - null
+    - - null
+      - null
+      - null
+      - null
+    doc: The average current source density aligned to a particular event, in volts/meters^2.
+    attributes:
+    - name: unit
+      dtype: text
+      value: volts/meters^2
+      doc: Unit of measurement for data, which is fixed to 'volts/meters^2'.
+  - name: time_from_event
+    dtype: float32
+    dims:
+    - num_times
+    shape:
+    - null
+    doc: Timestamps representing time from event onset, in seconds.
+    attributes:
+    - name: unit
+      dtype: text
+      value: seconds
+      doc: Unit of measurement for time_from_event, which is fixed to 'seconds'.
+    - name: event_description
+      dtype: text
+      doc: Description of what a time value of 0 represents, i.e., what event is the
+        CSD aligned to.
+  - name: rel_electrode_locations_x
+    dtype: float32
+    dims:
+    - num_electrodes_x
+    shape:
+    - - null
+    doc: X-axis coordinates of CSD, relative to a 'reference_frame', in meters.
+    quantity: '?'
+    attributes:
+    - name: unit
+      dtype: text
+      value: meters
+      doc: Unit of measurement for coordinate values, which is fixed to 'meters'.
+  - name: rel_electrode_locations_y
+    dtype: float32
+    dims:
+    - num_electrodes_y
+    shape:
+    - - null
+    doc: Y-axis coordinates of CSD, relative to a 'reference_frame', in meters.
+    quantity: '?'
+    attributes:
+    - name: unit
+      dtype: text
+      value: meters
+      doc: Unit of measurement for coordinate values, which is fixed to 'meters'.
+  - name: rel_electrode_locations_z
+    dtype: float32
+    dims:
+    - num_electrodes_z
+    shape:
+    - - null
+    doc: Z-axis coordinates of CSD, relative to a 'reference_frame', in meters
+    quantity: '?'
+    attributes:
+    - name: unit
+      dtype: text
+      value: meters
+      doc: Unit of measurement for coordinate values, which is fixed to 'meters'.

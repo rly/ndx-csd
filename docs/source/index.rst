@@ -1,5 +1,5 @@
 Specification for the ndx-csd extension
-==================================
+=======================================
 
 .. toctree::
     :numbered:

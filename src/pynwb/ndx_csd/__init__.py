@@ -1,5 +1,5 @@
 import os
-from pynwb import load_namespaces
+from pynwb import load_namespaces, get_class
 
 # Set path of the namespace.yaml file to the expected install location
 ndx_csd_specpath = os.path.join(
@@ -20,3 +20,7 @@ if not os.path.exists(ndx_csd_specpath):
 
 # Load the namespace
 load_namespaces(ndx_csd_specpath)
+
+from .csd import CSD  # noqa: E402,F401
+# CSD = get_class('CSD', 'ndx-csd')
+from .io import csd as __csd   # noqa: E402,F401

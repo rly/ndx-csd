@@ -1,16 +1,10 @@
-# ndx-csd Extension for NWB
+import datetime
+import numpy as np
+from pynwb import NWBHDF5IO, NWBFile
 
-This is an NWB extension for storing the results of a Current Source Density analysis on extracellularly recorded
-local field potential data in 1, 2, or 3 dimensions. Electrode locations can be marked as being actual electrode
-locations or virtual (interpolated) locations.
+from ndx_csd import CSD
 
-## Installation
 
-`pip install ndx-csd`
-
-## Usage
-
-```python
 import datetime
 import numpy as np
 from pynwb import NWBHDF5IO, NWBFile
@@ -54,11 +48,3 @@ with NWBHDF5IO(filename, mode='w') as io:
 with NWBHDF5IO(filename, mode='r', load_namespaces=True) as io:
     read_nwbfile = io.read()
     print(read_nwbfile.processing['ecephys']['CSD'])
-
-```
-
-## TODO
-
-- Add support for non-grid-based electrode locations. Think pixel_mask/manifold.
-
-This extension was created using [ndx-template](https://github.com/nwb-extensions/ndx-template).
