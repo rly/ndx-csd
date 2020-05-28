@@ -4,7 +4,6 @@ from pynwb import NWBHDF5IO, NWBFile
 
 from ndx_csd import CSD
 
-
 # create a new CSD object
 num_times = 101
 num_channels = 32
